@@ -1,0 +1,687 @@
+﻿@{
+    ViewBag.Title = "Online Shopping : Home Page";
+    Layout = "~/Views/Shared/_FrontLayout.cshtml";
+    List<OnlineShopping.DAL.Tbl_Product> FeaturedProducts = (List<OnlineShopping.DAL.Tbl_Product>)ViewBag.FeaturedProducts;
+}
+
+@{
+    List<OnlineShopping.DAL.Tbl_Category> AllCategories = (List<OnlineShopping.DAL.Tbl_Category>)ViewBag.CategoryAndSubCategory;
+}
+
+
+<link href="~/CSS/bootstrap.min.css" rel="stylesheet" />
+<link href="~/CSS/style.css" rel="stylesheet" />
+<link href="~/CSS/lava.css" rel="stylesheet" />
+
+
+
+<link href="~/cs/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<link href="~/cs/animate.min.css" rel="stylesheet" type="text/css" media="all" />
+<link href="~/cs/menu.css" rel="stylesheet" type="text/css" media="all" />
+<link href="~/cs/style.css" rel="stylesheet" type="text/css" media="all" />
+
+
+<style>
+    .profPerson .ProfImg {
+        width: 240px;
+        height: 153px;
+    }
+
+    .assistImg .transition {
+        height: 107px;
+    }
+
+
+    
+    }
+</style>
+
+<div class="homeSlider">
+
+</div>
+
+<script src="~/Scripts/jssor.slider.mini.js"></script>
+
+
+<!-- use jssor.slider.debug.js instead for debug -->
+<script>
+    jQuery(document).ready(function ($) {
+
+        var jssor_1_options = {
+            $AutoPlay: true,
+            $AutoPlaySteps: 1,
+            $SlideDuration: 700,
+            $SlideWidth: 1500,
+            $SlideSpacing: 3,
+            $Cols: 4,
+            $ArrowNavigatorOptions: {
+                $Class: $JssorArrowNavigator$,
+                $Steps: 4
+            },
+            $BulletNavigatorOptions: {
+                $Class: $JssorBulletNavigator$,
+                $SpacingX: 1,
+                $SpacingY: 1
+            }
+        };
+
+        var jssor_1_slider = new $JssorSlider$("jssor_1", jssor_1_options);
+
+        //responsive code begin
+        //you can remove responsive code if you don't want the slider scales while window resizing
+        function ScaleSlider() {
+            var refSize = jssor_1_slider.$Elmt.parentNode.clientWidth;
+            if (refSize) {
+                refSize = Math.min(refSize, 1500);
+                jssor_1_slider.$ScaleWidth(refSize);
+            }
+            else {
+                window.setTimeout(ScaleSlider, 30);
+            }
+        }
+        ScaleSlider();
+        $(window).bind("load", ScaleSlider);
+        $(window).bind("resize", ScaleSlider);
+        $(window).bind("orientationchange", ScaleSlider);
+        //responsive code end
+    });
+</script>
+
+<style>
+    /* jssor slider bullet navigator skin 03 css */
+    /*
+        .jssorb03 div           (normal)
+        .jssorb03 div:hover     (normal mouseover)
+        .jssorb03 .av           (active)
+        .jssorb03 .av:hover     (active mouseover)
+        .jssorb03 .dn           (mousedown)
+        */
+    .jssorb03 {
+        position: absolute;
+    }
+
+        .jssorb03 div, .jssorb03 div:hover, .jssorb03 .av {
+            position: absolute;
+            /* size of bullet elment */
+            width: 21px;
+            height: 21px;
+            text-align: center;
+            line-height: 21px;
+            color: #FFF;
+            font-size: 12px;
+            background-image: url('../../img/b03.png');
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .jssorb03 div {
+            background-position: -5px -4px;
+        }
+
+            .jssorb03 div:hover, .jssorb03 .av:hover {
+                background-position: -35px -4px;
+            }
+
+        .jssorb03 .av {
+            background-position: -65px -4px;
+        }
+
+        .jssorb03 .dn, .jssorb03 .dn:hover {
+            background-position: -95px -4px;
+        }
+
+    /* jssor slider arrow navigator skin 03 css */
+    /*
+        .jssora03l                  (normal)
+        .jssora03r                  (normal)
+        .jssora03l:hover            (normal mouseover)
+        .jssora03r:hover            (normal mouseover)
+        .jssora03l.jssora03ldn      (mousedown)
+        .jssora03r.jssora03rdn      (mousedown)
+        */
+    .jssora03l, .jssora03r {
+        display: block;
+        position: absolute;
+        /* size of arrow element */
+        width: 55px;
+        height: 55px;
+        cursor: pointer;
+        background-image: url('../../img/a03.png') no-repeat;
+        overflow: hidden;
+    }
+
+    .jssora03l {
+        background-position: -3px -33px;
+    }
+
+    .jssora03r {
+        background-position: -63px -33px;
+    }
+
+    .jssora03l:hover {
+        background-position: -123px -33px;
+    }
+
+    .jssora03r:hover {
+        background-position: -183px -33px;
+    }
+
+    .jssora03l.jssora03ldn {
+        background-position: -243px -33px;
+    }
+
+    .jssora03r.jssora03rdn {
+        background-position: -303px -33px;
+    }
+</style>
+
+
+<div id="jssor_1" style="position: relative; margin: 0 auto; top: 0px; left: 0px; width: 1500px; height: 630px; overflow: hidden; visibility: hidden;">
+    <!-- Loading Screen -->
+    <div data-u="loading" style="position: absolute; top: 0px; left: 0px;">
+        <div style="filter: alpha(opacity=70); opacity: 0.7; position: absolute; display: block; top: 0px; left: 0px; width: 100%; height: 100%;"></div>
+        <div style="position: absolute; display: block; background: no-repeat center center; background-image: url('../../img/loading.gif'); top: 0px; left: 0px; width: 100%; height: 100%;"></div>
+    </div>
+    <div data-u="slides" style="cursor: default; position: relative; top: 0px; left: 0px; width: 1500px; height: 630px; overflow: hidden;">
+        <div style="display: none;">
+
+            <img data-u="image" src="~/Images/banner1.jpg" />
+        </div>
+        <div style="display: none;">
+            <img data-u="image" src="~/Images/banner2.jpg" />
+        </div>
+        <div style="display: none;">
+            <img data-u="image" src="~/Images/banner3.jpg" />
+        </div>
+        <div style="display: none;">
+            <img data-u="image" src="~/Images/banner4.jpg" />
+        </div>
+        <div style="display: none;">
+            <img data-u="image" src="~/Images/banner11.jpg" />
+        </div>
+        <div style="display: none;">
+            <img data-u="image" src="~/Images/HomePageBanner1.png" />
+        </div>
+
+
+        <a data-u="ad" href="http://www.jssor.com" style="display:none">Bootstrap Slider</a>
+
+    </div>
+    <!-- Bullet Navigator -->
+    <div data-u="navigator" class="jssorb03" style="bottom:10px;right:10px;">
+        <!-- bullet navigator item prototype -->
+        <div data-u="prototype" style="width:21px;height:21px;">
+            <div data-u="numbertemplate"></div>
+        </div>
+    </div>
+    <!-- Arrow Navigator -->
+    <span data-u="arrowleft" class="jssora03l" style="top:0px;left:8px;width:55px;height:55px;" data-autocenter="2"></span>
+    <span data-u="arrowright" class="jssora03r" style="top:0px;right:8px;width:55px;height:55px;" data-autocenter="2"></span>
+</div>
+
+<!-- #endregion Jssor Slider End -->
+
+
+
+
+<div class="searchOnline clearfix">
+
+
+    <div class="container" style="margin-bottom:0px;">
+        <div class="olContent fl"><h2>Search Product & Category</h2></div>
+        <div class="olSearch fr">
+            @using (Html.BeginForm("Index", "Search", FormMethod.Post))
+            {
+                <div>
+                    <input type="text" placeholder="Enter a Product or Category" onkeypress="return onlynumericOrCharacter();" name="searchKey" class="inputComn houseText ">
+                </div>
+                <div class="searchIcon">
+                    <button type="button" class="searchBtn" onclick="$(this).parent().parent().submit();">
+                        <img src="/images/searchIcon.png" alt="img">
+                    </button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<div class="move-text" style="background-color:#008000; margin-right:0px;">
+    <div class="marquee"><a href="offers.html"> New collections are available here...... <span>Get extra 10% off on everything | no extra taxes </span> <span> With a Free One Year Warrantee</span></a></div>
+
+    <script type="text/javascript" src="~/js/jquery.marquee.min.js"></script>
+    <script>
+        $('.marquee').marquee({ pauseOnHover: true });
+
+    </script>
+
+</div>
+
+
+
+
+
+
+<!--End Slider--> <!--Start Featured Professionals--> <div class="featuredProfessionals">
+    <div class="container">
+        <h1 style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-weight:bold; color:#4800ff;">FEATURE PRODUCTS</h1>
+        <div class="professionSLider">
+            <div class="profSlider">
+                @foreach (var featured in FeaturedProducts)
+                {
+                    <div class="item" style="border-radius:10px; ">
+                        <div class="profPerson">
+
+
+                            <div class="profMid clearfix" style="">
+                                @if (File.Exists(Server.MapPath(System.Configuration.ConfigurationManager.AppSettings["ProductImage"] + "Medium/" + featured.ProductId + "_" + featured.ProductImage)))
+                                {
+                                    <img class="ProfImg" title="Click to view product detail" style="cursor:pointer; " onclick="window.location.href ='/search/productdetail?pId=@featured.ProductId'" src="@(System.Configuration.ConfigurationManager.AppSettings["ProductImage"] + "Medium/" + featured.ProductId + "_" + featured.ProductImage)" />
+                                }
+                                else
+                                {
+                                    <img class="ProfImg" title="Click to view product detail" style="cursor:pointer;  " onclick="window.location.href ='/search/productdetail?pId=@featured.ProductId'" src="@(System.Configuration.ConfigurationManager.AppSettings["ProductImage_Default_Medium"])" alt="" />
+                                }
+
+                                <h2 title="Click to view product detail" style="cursor:pointer;"><a href="/search/productdetail?pId=@featured.ProductId">  @featured.ProductName</a></h2>                                 <div class="leftprof fl">
+                                    <text>
+                                        Category <a title="Products of this category" style="cursor:pointer;" href="/search?searchkey=@featured.Tbl_Category.CategoryName">@featured.Tbl_Category.CategoryName</a>
+                                    </text>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="profLast clearfix" style="border-radius:5px;background-color:#008000;color:#FFF; ">
+                            <div class="leftprofLast fl"><h4>Price</h4></div>
+                            <div class="rightprofLast fr"><h5>@(featured.Price)</h5></div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="left-symbol"><img src="~/Images/left.png" alt="images"></div>
+            <div class="right-symbol"><img src="~/Images/right.png" alt="images"></div>
+        </div>
+    </div>
+</div>
+<!--End Featured Professionals-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section id="aa-product">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="aa-product-area">
+
+
+                        <div class="aa-product-inner">
+                            <!-- start prduct navigation -->
+
+
+
+                            <ul class="nav nav-tabs aa-products-tab">
+
+                                @foreach (var cat in AllCategories)
+            {
+                                    <li class="@(AllCategories.Where(i => i.CategoryId == cat.CategoryId).Count() > 0 ? "subcat" : "")">
+                                        <a href="/Search/index?searchKey=@cat.CategoryName">@cat.CategoryName</a>
+                                        <ul class="subCategories" style="display:@(AllCategories.Where(i => i.CategoryId == cat.CategoryId).Count() > 0  ? "" : "none")">
+                                            <h1>All @cat.CategoryName</h1>
+                                            @foreach (var p in cat.Tbl_Product.ToList())
+                {
+                                                <li><a href="/Search/index?searchKey=@p.ProductName">@p.ProductName</a></li>
+                                            }
+                                        </ul>
+                                    </li>
+                                }
+
+
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- products -->
+<div class="products">
+    <div class="container">
+        <div class="col-md-9 product-w3ls-right">
+
+
+
+        </div>
+          <div class="products-row">
+                <div class="col-md-3 product-grids">
+                    <div class="agile-products">
+                        <div class="new-tag"><h6>20%<br>Off</h6></div>
+                        <a href="/search/productdetail?pId=7"></a>
+                        <div class="agile-product-text">
+                            <h5><a href="/search/productdetail?pId=7"><img src="~/Content/ProductImage/Large/7_samsung android.jpg" class="img-responsive" alt="Samsung Andriod" />Samsung Phone</a></h5>
+          
+                            <h6><del>N2000</del> N10000</h6>
+                            <form action="#" method="post">
+    <input type="hidden" name="cmd" value="_cart" />
+    <input type="hidden" name="add" value="1" />
+    <input type="hidden" name="w3ls_item" value="Samsung Andriod Phone" />
+    <input type="hidden" name="amount" value="100.00" />
+  
+    <button type="submit" class="w3ls-cart pw3ls-cart"><i class="fa fa-cart-plus" aria-hidden="true"></i> Click to View</button>
+    
+         </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 product-grids">
+                    <div class="agile-products">
+                        <div class="new-tag"><h6>New</h6></div>
+                        <a href="/search/productdetail?pId=6"></a>
+                        <div class="agile-product-text">
+                            <h5><a href="/search/productdetail?pId=6"><img src="~/Content/ProductImage/Large/6_nokia.jpg" class="img-responsive" alt="Nokia" />Nokia</a></h5>
+                            <h6><del>N9000</del>N 7000</h6>
+                            <form action="#" method="post">
+                                <input type="hidden" name="cmd" value="_cart" />
+                                <input type="hidden" name="add" value="1" />
+                                <input type="hidden" name="w3ls_item" value="Nokia" />
+                                <input type="hidden" name="amount" value="7000.00" />
+                                <button type="submit" class="w3ls-cart pw3ls-cart"><i class="fa fa-cart-plus" aria-hidden="true"></i> Click to View</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 product-grids">
+                    <div class="agile-products">
+                        <div class="new-tag"><h6>5% <br> ON SALE</h6></div>
+                        <a href="/search/productdetail?pId=8"></a>
+                        <div class="agile-product-text">
+                            <h5><a href="/search/productdetail?pId=8"><img src="~/Content/ProductImage/Large/8_iphone-iphone5-colors.jpg" class="img-responsive" alt="I Phone 5" /> IPhone 5</a></h5>
+                            <h6><del>21000</del> 17000</h6>
+                            <form action="#" method="post">
+                                <input type="hidden" name="cmd" value="_cart" />
+                                <input type="hidden" name="add" value="1" />
+                                <input type="hidden" name="w3ls_item" value="IPhone 5" />
+                                <input type="hidden" name="amount" value="17000" />
+                                <button type="submit" class="w3ls-cart pw3ls-cart"><i class="fa fa-cart-plus" aria-hidden="true"></i> Click to View</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 product-grids">
+                    <div class="agile-products">
+                        <div class="new-tag"><h6>5% <br> ON SALE</h6></div>
+                        <a href="/search/productdetail?pId=4"></a>
+                        <div class="agile-product-text">
+                            <h5><a href="/search/productdetail?pId=4"><img src="~/Content/ProductImage/Large/4_blackberry.jpg" class="img-responsive" alt="I Phone 5" /> blackberry</a></h5>
+                            <h6><del>21000</del> 17000</h6>
+                            <form action="#" method="post">
+                                <input type="hidden" name="cmd" value="_cart" />
+                                <input type="hidden" name="add" value="1" />
+                                <input type="hidden" name="w3ls_item" value="IPhone 5" />
+                                <input type="hidden" name="amount" value="17000" />
+                                <button type="submit" class="w3ls-cart pw3ls-cart"><i class="fa fa-cart-plus" aria-hidden="true"></i> Click to View</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 product-grids">
+                    <div class="agile-products">
+                        <div class="new-tag"><h6>New</h6></div>
+                        <a href="/search/productdetail?pId=9"></a>
+                        <div class="agile-product-text">
+                            <h5><a href="/search/productdetail?pId=9"><img src="~/Content/ProductImage/Large/9_Hp printer.jpg" class="img-responsive" alt="Hp printer" />Hp  printer</a></h5>
+                            <h6><del>N29000</del>N 27000</h6>
+                            <form action="#" method="post">
+                                <input type="hidden" name="cmd" value="_cart" />
+                                <input type="hidden" name="add" value="1" />
+                                <input type="hidden" name="w3ls_item" value="Hp printer" />
+                                <input type="hidden" name="amount" value="27000.00" />
+                                <button type="submit" class="w3ls-cart pw3ls-cart"><i class="fa fa-cart-plus" aria-hidden="true"></i> Click to View</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 product-grids">
+                    <div class="agile-products">
+                        <div class="new-tag"><h6>New</h6></div>
+                        <a href="/search/productdetail?pId=10"></a>
+                        <div class="agile-product-text">
+                            <h5><a href="/search/productdetail?pId=10"><img src="~/Content/ProductImage/Large/10_samsung_c410w_tray-100047305-orig.jpg" class="img-responsive" alt="Hp printer" />Samsung  printer</a></h5>
+                            <h6><del>N39000</del>N 29000</h6>
+                            <form action="#" method="post">
+                                <input type="hidden" name="cmd" value="_cart" />
+                                <input type="hidden" name="add" value="1" />
+                                <input type="hidden" name="w3ls_item" value="Samsung C410w printer" />
+                                <input type="hidden" name="amount" value="29000.00" />
+                                <button type="submit" class="w3ls-cart pw3ls-cart"><i class="fa fa-cart-plus" aria-hidden="true"></i> Click to View</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 product-grids">
+                    <div class="agile-products">
+                        <div class="new-tag"><h6>New</h6></div>
+                        <a href="/search/productdetail?pId=11"></a>
+                        <div class="agile-product-text">
+                            <h5><a href="/search/productdetail?pId=11"><img src="~/Content/ProductImage/Large/11_SP C830DN.jpg" class="img-responsive" alt="Hp printer" />C830DN  printer</a></h5>
+                            <h6><del>N65000</del>N 60000</h6>
+                            <form action="#" method="post">
+                                <input type="hidden" name="cmd" value="_cart" />
+                                <input type="hidden" name="add" value="1" />
+                                <input type="hidden" name="w3ls_item" value="C830DN printer" />
+                                <input type="hidden" name="amount" value="60000.00" />
+                                <button type="submit" class="w3ls-cart pw3ls-cart"><i class="fa fa-cart-plus" aria-hidden="true"></i> Click to View</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 product-grids">
+                    <div class="agile-products">
+                        <div class="new-tag"><h6>New</h6></div>
+                        <a href="/search/productdetail?pId=12"></a>
+                        <div class="agile-product-text">
+                            <h5><a href="/search/productdetail?pId=12"><img src="~/Content/ProductImage/Large/12_sony HDV.jpg" class="img-responsive" alt="Sony HDV Camera" />Sony HDV Camera</a></h5>
+                            <h6><del>N 70000</del>N 65000</h6>
+                            <form action="#" method="post">
+                                <input type="hidden" name="cmd" value="_cart" />
+                                <input type="hidden" name="add" value="1" />
+                                <input type="hidden" name="w3ls_item" value="Sony HDV Camera" />
+                                <input type="hidden" name="amount" value="65000.00" />
+                                <button type="submit" class="w3ls-cart pw3ls-cart"><i class="fa fa-cart-plus" aria-hidden="true"></i> Click to View</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 product-grids">
+                    <div class="agile-products">
+                        <div class="new-tag"><h6>New</h6></div>
+                        <a href="/search/productdetail?pId=13"></a>
+                        <div class="agile-product-text">
+                            <h5><a href="/search/productdetail?pId=13"><img src="~/Content/ProductImage/Large/13_sony Zeiss.jpg" class="img-responsive" alt="Sony Zeiss Camera" />Sony Zeiss Camera</a></h5>
+                            <h6><del>N29000</del>N 27000</h6>
+                            <form action="#" method="post">
+                                <input type="hidden" name="cmd" value="_cart" />
+                                <input type="hidden" name="add" value="1" />
+                                <input type="hidden" name="w3ls_item" value="Sony Zeiss Camera" />
+                                <input type="hidden" name="amount" value="27000.00" />
+                                <button type="submit" class="w3ls-cart pw3ls-cart"><i class="fa fa-cart-plus" aria-hidden="true"></i> Click to View</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 product-grids">
+                    <div class="agile-products">
+                        <div class="new-tag"><h6>New</h6></div>
+                        <a href="/search/productdetail?pId=1009"></a>
+                        <div class="agile-product-text">
+                            <h5><a href="/search/productdetail?pId=1009"><img src="~/Content/ProductImage/Large/1009_dell-xps-13-gold-lid2-1500x1001.jpg" class="img-responsive" alt="Dell-xps" />Dell-xps</a></h5>
+                            <h6><del>N72000</del>N 75000</h6>
+                            <form action="#" method="post">
+                                <input type="hidden" name="cmd" value="_cart" />
+                                <input type="hidden" name="add" value="1" />
+                                <input type="hidden" name="w3ls_item" value="Dell-xps" />
+                                <input type="hidden" name="amount" value="75000.00" />
+                                <button type="submit" class="w3ls-cart pw3ls-cart"><i class="fa fa-cart-plus" aria-hidden="true"></i> Click to View</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 product-grids">
+                    <div class="agile-products">
+                        <div class="new-tag"><h6>New</h6></div>
+                        <a href="/search/productdetail?pId=1010"></a>
+                        <div class="agile-product-text">
+                            <h5><a href="/search/productdetail?pId=1010"><img src="~/Content/ProductImage/Large/1010_Dell-XPS-5.jpg" class="img-responsive" alt="Dell-xps" />Dell-xps</a></h5>
+                            <h6><del>N90000</del>N 85000</h6>
+                            <form action="#" method="post">
+                                <input type="hidden" name="cmd" value="_cart" />
+                                <input type="hidden" name="add" value="1" />
+                                <input type="hidden" name="w3ls_item" value="dell xps" />
+                                <input type="hidden" name="amount" value="85000.00" />
+                                <button type="submit" class="w3ls-cart pw3ls-cart"><i class="fa fa-cart-plus" aria-hidden="true"></i> Click to View</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 product-grids">
+                    <div class="agile-products">
+                        <div class="new-tag"><h6>New</h6></div>
+                        <a href="/search/productdetail?pId=1011"></a>
+                        <div class="agile-product-text">
+                            <h5><a href="/search/productdetail?pId=1011"><img src="~/Content/ProductImage/Large/1011_Asus_X555LA-XX290H_budget_laptop_800_thumb800.jpg" class="img-responsive" alt="Asus" />Asus Computer</a></h5>
+                            <h6><del>N90000</del>N 85000</h6>
+                            <form action="#" method="post">
+                                <input type="hidden" name="cmd" value="_cart" />
+                                <input type="hidden" name="add" value="1" />
+                                <input type="hidden" name="w3ls_item" value="Asus Computer" />
+                                <input type="hidden" name="amount" value="85000.00" />
+                                <button type="submit" class="w3ls-cart pw3ls-cart"><i class="fa fa-cart-plus" aria-hidden="true"></i> Click to View</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+            <script src="~/Scripts/jquery.easing.min.js"></script>
+            <script src="~/Scripts/carousel.js"></script>
+            <script src="~/Scripts/bootstrap.min.js"></script>
+            <script src="~/Scripts/jquery-2.1.0.min.js"></script>
+
+            <script src="~/Scripts/custom.js"></script>
+            <script src="~/Scripts/sequence-theme.modern-slide-in.js"></script>
+            <script src="~/Scripts/sequence.js"></script>
+            <script src="~/Scripts/jquery.simpleLens.js"></script>
+            <script src="~/Scripts/jquery.smartmenus.bootstrap.js"></script>
+            <script src="~/Scripts/jquery.simpleGallery.js"></script>
+            @section Scripts{
+
+                <script>
+                    window.onload = function () {
+                        if ('@Request.QueryString["returnUrl"]' != '') {
+                            $('#returnUrl').val('@Request.QueryString["returnUrl"]')
+                            $('.loginpopup').trigger('click');
+                        }
+
+                        if ('@(Request.UrlReferrer !=null ?Request.UrlReferrer.AbsolutePath.ToLower():"")' == '/account/resetpassword') {
+                            $('.loginpopup').trigger('click');
+                        }
+                        if ('@TempData["VerificationLinlMsg"]' != '') {
+                            swal('@TempData["VerificationLinlMsg"]', '', 'success');
+                        }
+                    }     </script>
+
+
+
+            }
+
+
+            <script type="text/javascript" src="~/js/move-top.js"></script>
+            <script type="text/javascript" src="~/js/easing.js"></script>
+            <script type="text/javascript">
+                jQuery(document).ready(function ($) {
+                    $(".scroll").click(function (event) {
+                        event.preventDefault();
+                        $('html,body').animate({ scrollTop: $(this.hash).offset().top }, 1000);
+                    });
+                });
+            </script>
+
+            <!-- //end-smooth-scrolling -->
+            <!-- smooth-scrolling-of-move-up -->
+            <script type="text/javascript">
+                $(document).ready(function () {
+
+                    var defaults = {
+                        containerID: 'toTop', // fading element id
+                        containerHoverID: 'toTopHover', // fading element hover id
+                        scrollSpeed: 1200,
+                        easingType: 'linear'
+                    };
+
+                    $().UItoTop({ easingType: 'easeOutQuart' });
+
+                });
+
+            </script>
+
+
+
+
+           
+            <script src="~/js/jquery-scrolltofixed-min.js" type="text/javascript"></script>
+            <script>
+                $(document).ready(function () {
+
+                    // Dock the header to the top of the window when scrolled past the banner. This is the default behaviour.
+
+                    $('.header-two').scrollToFixed();
+                    // previous summary up the page.
+
+                    var summaries = $('.summary');
+                    summaries.each(function (i) {
+                        var summary = $(summaries[i]);
+                        var next = summaries[i + 1];
+
+                        summary.scrollToFixed({
+                            marginTop: $('.header-two').outerHeight(true) + 10,
+                            zIndex: 999
+                        });
+                    });
+                });
+            </script>

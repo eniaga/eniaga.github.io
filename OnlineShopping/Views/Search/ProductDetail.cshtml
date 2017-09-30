@@ -1,0 +1,221 @@
+﻿@model OnlineShopping.DAL.Tbl_Product
+@using OnlineShopping.DAL
+@{     ViewBag.Title = "ProductDetail";
+    Layout = "~/Views/Shared/_FrontLayout.cshtml";
+    List<Tbl_Product> SimilarProducts = (List<Tbl_Product>)ViewBag.SimilarProducts;
+}
+
+<link href="~/CSS/style.css" rel="stylesheet" />
+
+
+<link href="~/cs/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<link href="~/cs/animate.min.css" rel="stylesheet" type="text/css" media="all" />
+<link href="~/cs/menu.css" rel="stylesheet" type="text/css" media="all" />
+<link href="~/cs/style.css" rel="stylesheet" type="text/css" media="all" />
+
+
+
+<style>
+    .servicesList .servicesBox .servicesImg img {
+        height: 145px;
+    }
+
+    .othersViewed {
+        background-color: #005FAA;
+        color: #FFF;
+    }
+</style>
+
+
+
+<div class="move-text" style="background-color:#008000; margin-right:0px;">
+    <div class="marquee"><a href="offers.html"> New collections are available here...... <span>Get extra 10% off on everything | no extra taxes </span> <span> With a Free One Year Warrantee</span></a></div>
+
+    <script type="text/javascript" src="~/js/jquery.marquee.min.js"></script>
+    <script>
+        $('.marquee').marquee({ pauseOnHover: true });
+
+    </script>
+
+</div>
+
+
+ <!--Start product Details--> <div class="servicefinal">
+    <div class="container">
+        <div class="servicefinalLeft fl">
+            <!--Start servicesdetailsBox-->
+            <div class="servicesdetailsBox">
+                @if (File.Exists(Server.MapPath(System.Configuration.ConfigurationManager.AppSettings["ProductImage"] + "Large/" + Model.ProductId + "_" + Model.ProductImage)))
+                {
+                    <img src="@(System.Configuration.ConfigurationManager.AppSettings["ProductImage"] + "Large/" +Model.ProductId+ "_" + Model.ProductImage)" />                     }
+                else
+                {
+                    <img src="@(System.Configuration.ConfigurationManager.AppSettings["ProductImage_Default_Large"])" alt="" />
+                }
+                <div class="inrfinalServices">
+                    <h2>@Model.ProductName</h2>
+                    <h3>@Model.Tbl_Category.CategoryName</h3>
+                </div>
+            </div>
+            <!--End servicesdetailsBox-->
+            <!--Start Description-->
+            <div class="description">
+                <!--Start aboutMe-->
+                <div class="aboutMe">
+
+                    <h1 class="prfHeading">Description</h1>
+                    <div class="profInnerBox innerbox1">
+                        @Html.Raw(Model.Description)
+                    </div>
+                </div>                 <!--End aboutMe-->
+            </div>             <!--End Description-->
+        </div>
+
+
+
+        <div class="servicefinalRight fr">
+            <!--Start Add product to cart-->
+            <div class="bookaService">
+                <span>Price</span>
+                <strong>@Model.Price</strong>
+                <a href="/shopping/addproducttocart?productId=@Model.ProductId" class="bookreviewBtn" type="button">Add to cart</a>
+            </div>
+            <!--End Add product to cart-->
+            <!--Start Similar Products-->
+
+            <div class="favorite">
+                <div class="othersViewed" style="background-color:#005FAA;"><span>Similar Products</span></div>
+            </div>
+
+
+            <div class="products">
+                <div class="container">
+                    <div class="col-md-9 product-w3ls-right">
+
+                    </div>
+                    <div class="products-row">
+                        <div class="viewList">
+                            <ul class="servicesList">
+                                @if (SimilarProducts.Count > 0)
+                                {
+                                    foreach (var ov in SimilarProducts)
+                                    {
+
+                                        <li>
+                                            <!--Start ServicesBox-->
+                                            <div class="col-md-3 product-grids">
+                                                <div class="agile-products">
+
+                                                    <a href="/search/productDetail?pId=@ov.ProductId">
+                                                        @if (File.Exists(Server.MapPath(System.Configuration.ConfigurationManager.AppSettings["ProductImage"] + "Medium/" + ov.ProductId + "_" + ov.ProductImage)))
+                                                        {
+                                                            <img src="@(System.Configuration.ConfigurationManager.AppSettings["ProductImage"] + "Medium/" + ov.ProductId + "_" + ov.ProductImage)" style="max-height:120px;" class="img-responsive" alt="img" />
+                                                        }
+                                                        else
+                                                        {
+                                                            <img src="/images/No Photo.png" alt="" />
+                                                        }
+                                                    </a>
+
+                                                    <div class="agile-product-text">
+                                                        <h5><a href="/search/productdetail?pId=@ov.ProductId" title="View product details">@ov.ProductName</a></h5>
+
+                                                        <h5>Category : @ov.Tbl_Category.CategoryName</h5>
+
+                                                        <h6>  Price  N @ov.Price </h6>
+                                                        <form action="#" method="post">
+                                                            <input type="hidden" name="cmd" value="_cart" />
+                                                            <input type="hidden" name="add" value="1" />
+                                                            <input type="hidden" name="w3ls_item" value="/search/productDetail?pId=@ov.ProductId" />
+                                                            <input type="hidden" name="amount" value="Price N @ov.Price" />
+                                                            <button type="submit" class="w3ls-cart pw3ls-cart"><i class="fa fa-cart-plus" aria-hidden="true"></i> Click to View</button>
+                                                        </form>
+
+
+                                                    </div>
+                                                </div>
+                                            </div><!--End Similar Products-->
+                                        </li>
+
+                                    }
+                                }
+                                else
+                                {
+                                    <li>
+                                        No similar products
+                                        <div class="servicesBox">
+                                        </div>
+                                    </li>
+                                }
+
+                            </ul>
+                            </div><!--End list-->
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+</div> <!--End product Details-->
+
+
+<script type="text/javascript" src="~/js/move-top.js"></script>
+<script type="text/javascript" src="~/js/easing.js"></script>
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+        $(".scroll").click(function (event) {
+            event.preventDefault();
+            $('html,body').animate({ scrollTop: $(this.hash).offset().top }, 1000);
+        });
+    });
+</script>
+
+<!-- //end-smooth-scrolling -->
+<!-- smooth-scrolling-of-move-up -->
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        var defaults = {
+            containerID: 'toTop', // fading element id
+            containerHoverID: 'toTopHover', // fading element hover id
+            scrollSpeed: 1200,
+            easingType: 'linear'
+        };
+
+        $().UItoTop({ easingType: 'easeOutQuart' });
+
+    });
+
+</script>
+
+
+
+
+
+
+<script src="~/js/jquery-scrolltofixed-min.js" type="text/javascript"></script>
+<script>
+    $(document).ready(function () {
+
+        // Dock the header to the top of the window when scrolled past the banner. This is the default behaviour.
+
+        $('.header-two').scrollToFixed();
+        // previous summary up the page.
+
+        var summaries = $('.summary');
+        summaries.each(function (i) {
+            var summary = $(summaries[i]);
+            var next = summaries[i + 1];
+
+            summary.scrollToFixed({
+                marginTop: $('.header-two').outerHeight(true) + 10,
+                zIndex: 999
+            });
+        });
+    });
+</script>

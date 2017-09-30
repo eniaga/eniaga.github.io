@@ -1,0 +1,187 @@
+﻿@model IEnumerable<OnlineShopping.DAL.USP_Search_Result>
+@{     ViewBag.Title = "Search Result"; Layout = "~/Views/Shared/_FrontLayout.cshtml"; }
+<link href="~/CSS/style.css" rel="stylesheet" />
+
+
+
+<link href="~/cs/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<link href="~/cs/animate.min.css" rel="stylesheet" type="text/css" media="all" />
+<link href="~/cs/menu.css" rel="stylesheet" type="text/css" media="all" />
+<link href="~/cs/style.css" rel="stylesheet" type="text/css" media="all" />
+
+<style>
+    .servicesBox .servicesImg img {
+        height: 172px;
+        width: 270px;
+    }
+
+    .DservicesImg img {
+        height: 162px;
+        width: 254px;
+    }
+
+    .FilterBox {
+        max-height: 200px;
+        overflow: auto;
+    }
+</style>
+@using (Html.BeginForm())
+{     <div id="dvFilterSearch">
+        <div class="mainHouse">
+            <div class="container">
+                <div class="housekeeping clearfix">
+                    <div class="housekeepingLeft fl"><h1>@ViewBag.searchKey &nbsp; <span>@(!string.IsNullOrEmpty(ViewBag.searchKey) ? "I" : "")  &nbsp; @(Model != null ? Model.Count() : 0) records found</span></h1> </div><div class="housekeepingRight fr" id="divFilter">
+                        <div class="housekeepingInput" style="color:#FFF;"><input type="text" placeholder="Enter Product or Cateory Name" class="houseComn" id="searchKey" name="searchKey" value="@ViewBag.searchKey" onkeypress="return onlynumericOrCharacter();"></div><div class="housekeepingSearch"><button type="button" class="housesearchBtn" onclick="$(this).parent().parent().submit();"><img src="/images/searchIcon.png" alt="img" /></button></div>
+                    </div>
+                </div>
+            </div>
+            }
+              </div>         <div class="mainServices clearfix">
+
+
+
+
+                                 <div class="move-text" style="background-color:#008000; margin-right:0px;">
+                                     <div class="marquee"><a href="offers.html"> New collections are available here...... <span>Get extra 10% off on everything | no extra taxes </span> <span> With a Free One Year Warrantee</span></a></div>
+
+                                     <script type="text/javascript" src="~/js/jquery.marquee.min.js"></script>
+                                     <script>
+        $('.marquee').marquee({ pauseOnHover: true });
+
+                                     </script>
+
+                                 </div>
+
+
+            <div class="products">
+                <div class="container">
+                    <div class="col-md-9 product-w3ls-right">
+
+                    </div>
+                    @if (Model.Count() > 0)
+                    {
+
+                        <div class="products-row">
+
+                           
+                            <ul>
+                               
+                                        @foreach (var item in Model)
+                                        {
+                                            <li>
+                                                <div class="col-md-3 product-grids">
+                                                    <div class="agile-products">
+
+
+                                                        <a href="/search/productDetail?pId=@item.ProductId">
+                                                            @if (File.Exists(Server.MapPath(System.Configuration.ConfigurationManager.AppSettings["ProductImage"] + "/Medium/" + item.ProductId + "_" + item.ProductImage)))
+                                                            {  <img src="@(System.Configuration.ConfigurationManager.AppSettings["ProductImage"]+"/Medium/"+item.ProductId+ "_"+item.ProductImage)" style="max-height:120px;" class="img-responsive" alt="img">}
+                                                            else
+                                                            { <img src="@(System.Configuration.ConfigurationManager.AppSettings["ProductImage_Default"])" style="max-height:120px;"  class="img-responsive" alt="img">}
+                                                        </a>
+                                                        <div class="agile-product-text">
+                                                            <h5><a href="/search/productDetail?pId=@item.ProductId">@item.ProductName</a></h5>
+                                                            <h5>Category: @item.CategoryName</h5>
+                                                            <h6>  Price N @item.Price</h6>
+
+                                                            <form action="#" method="post">
+                                                                <input type="hidden" name="cmd" value="_cart" />
+                                                                <input type="hidden" name="add" value="1" />
+                                                                <input type="hidden" name="w3ls_item" value="/search/productDetail?pId=@item.ProductId" />
+                                                                <input type="hidden" name="amount" value="Price N @item.Price" />
+                                                                <button type="submit" class="w3ls-cart pw3ls-cart" ><i class="fa fa-cart-plus" aria-hidden="true"></i> Click to View</button>
+                                                            </form>
+                                                        </div>
+
+                                                    </div><!--End Services Man-->
+                                                </div>
+                                            </li>
+                                        }
+                                    
+                            </ul> <!--End ServicesBox-->
+
+                        </div>                     }
+                    else
+                    {     <div class="tabContent" id="tab3">
+                        <!--Start Services Man--><div class="clearfix">
+                            <!--Start detailServicesBox--><div class="detailservicesBox clearfix"><div style="background-color: #fff; text-align: center; padding: 40% 0; "> <h2>No Records found</h2></div></div>
+                        </div>+-
+                    </div>}
+                </div>
+            </div>
+        </div>         <br />         <!--Start main services-->
+    </div> } <!--End main services-->
+
+
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            debugger
+            if ('@TempData["ProductAddedToCart"]' != '') {
+                swal('@TempData["ProductAddedToCart"]', '', 'success');
+            }
+        });
+        $('#searchKey').keydown(function (e) {
+            if (e.keyCode == 13) {
+                $('#dvFilterSearch').parent().submit();
+            }
+        })
+    </script>
+}
+
+<script type="text/javascript" src="~/js/move-top.js"></script>
+<script type="text/javascript" src="~/js/easing.js"></script>
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+        $(".scroll").click(function (event) {
+            event.preventDefault();
+            $('html,body').animate({ scrollTop: $(this.hash).offset().top }, 1000);
+        });
+    });
+</script>
+
+<!-- //end-smooth-scrolling -->
+<!-- smooth-scrolling-of-move-up -->
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        var defaults = {
+            containerID: 'toTop', // fading element id
+            containerHoverID: 'toTopHover', // fading element hover id
+            scrollSpeed: 1200,
+            easingType: 'linear'
+        };
+
+        $().UItoTop({ easingType: 'easeOutQuart' });
+
+    });
+
+</script>
+
+
+
+
+
+
+<script src="~/js/jquery-scrolltofixed-min.js" type="text/javascript"></script>
+<script>
+    $(document).ready(function () {
+
+        // Dock the header to the top of the window when scrolled past the banner. This is the default behaviour.
+
+        $('.header-two').scrollToFixed();
+        // previous summary up the page.
+
+        var summaries = $('.summary');
+        summaries.each(function (i) {
+            var summary = $(summaries[i]);
+            var next = summaries[i + 1];
+
+            summary.scrollToFixed({
+                marginTop: $('.header-two').outerHeight(true) + 10,
+                zIndex: 999
+            });
+        });
+    });
+</script>

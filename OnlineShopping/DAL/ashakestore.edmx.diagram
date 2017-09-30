@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ec00f03d4d664b93ae9adbceda3574a2" Name="Diagram1">
+        <EntityTypeShape EntityType="ashakestoreModel.Tbl_Cart" Width="1.5" PointX="3" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ashakestoreModel.Tbl_CartStatus" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ashakestoreModel.Tbl_Category" Width="1.5" PointX="1.5" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ashakestoreModel.Tbl_MemberRole" Width="1.5" PointX="6" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ashakestoreModel.Tbl_Members" Width="1.5" PointX="0.75" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ashakestoreModel.Tbl_Product" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ashakestoreModel.Tbl_Roles" Width="1.5" PointX="3.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ashakestoreModel.Tbl_ShippingDetails" Width="1.5" PointX="5.75" PointY="6.5" IsExpanded="true" />
+        <AssociationConnector Association="ashakestoreModel.FK__Tbl_Cart__CartSt__1DE57479" ManuallyRouted="false" />
+        <AssociationConnector Association="ashakestoreModel.FK__Tbl_Cart__Member__1ED998B2" ManuallyRouted="false" />
+        <AssociationConnector Association="ashakestoreModel.FK__Tbl_Cart__Produc__1FCDBCEB" ManuallyRouted="false" />
+        <AssociationConnector Association="ashakestoreModel.FK_Tbl_Category_Tbl_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="ashakestoreModel.fk_Tbl_Member_Tbl_MemberRole" ManuallyRouted="false" />
+        <AssociationConnector Association="ashakestoreModel.fk_Tbl_Roles_Tbl_MemberRole" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
